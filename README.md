@@ -1,6 +1,14 @@
 #Link-Keeper
 Link-Keeper is a command line tool to help you keep links you want to read later
 
+I just remembered this is similar to [Zach Holman's](https://twitter.com/#!/holman) 
+[Boom](http://zachholman.com/boom/) project. I think that solves the Ruby vs Node.js
+debate for me. Since this idea has been done in Ruby, I'm going to do it in Node.js.
+
+This project is strictly about keeping my open tab count low so I don't feel bad about
+life. Boom seems like a cool project too, so I won't be sad if you think that suits your 
+needs better.
+
 ##Why
 I hate having too many tabs at once. Tools like like 
 [Read Later Fast](https://chrome.google.com/webstore/detail/decdfngdidijkdjgbknlnepdljfaepji)
