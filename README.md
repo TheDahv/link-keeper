@@ -13,6 +13,9 @@ Even though there are existing solutions, I want a new tool that:
 * Keeps a local and permanent copy of links I like.
 * I create myself. This is a fun learning project for me!
 
+##Installation
+I haven't decided what language to write this in yet. I don't know.
+
 ##Usage
 None of this actually exists yet. Think of this as 
 '[README driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html).'
@@ -37,6 +40,7 @@ Lists all the things link-keeper can do
 
 ###List links
 `link-keeper ls [tag]`
+
 `link-keeper list [tag]`
 
 Lists all the links stored in link-keeper. If a tag is specified, link-keeper will
@@ -60,8 +64,11 @@ URLs out quickly.
 
 ###Copy link
 `link-keeper cp [link-id]`
+
 `link-keeper cp [link-nick]`
+
 `link-keeper copy [link-id]`
+
 `link-keeper copy [link-nick]`
 
 Once you find the link you want, link-keeper can copy the URL into your
@@ -79,20 +86,21 @@ specified when you initiated link-keeper.
 
 ###Edit links
 `link-keeper edit [link-id] [--tag] [--nick] [--url]`
+
 `link-keeper edit [link-nick] [--tag] [--nick] [--url]`
 
 Useful if you want to add a nick or change the tag on a URL.
 
 ###Delete links
 `link-keeper rm [link-id]`
+
 `link-keeper rm [link-nick]`
+
 `link-keeper delete [link-id]`
+
 `link-keeper delete [link-nick]`
 
 Removes a link entry from the datastore.
-
-##Installing
-I haven't decided what language to write this in yet. I don't know.
 
 ##Contributing
 Pull requests with working tests are welcome. 
