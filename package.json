@@ -1,0 +1,23 @@
+{
+  "author": "David Pierce <david.dean.pierce@gmail.com> (http://www.thedahv.com)",
+  "name": "link-keeper",
+  "description": "A command line tool to keep your links",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TheDahv/link-keeper.git"
+  },
+  "main": "link-keeper.coffee",
+  "scripts": {
+    "test": "./link-keeper.coffee"
+  },
+  "engines": {
+    "node": "~v0.4.9"
+  },
+  "dependencies": {
+    "commander": "~v0.5.1" 
+  },
+  "devDependencies": {
+    "jasmine-node": "~v1.0.22"   
+  }
+}
