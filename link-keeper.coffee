@@ -28,8 +28,17 @@ list_tag_action = () ->
     .map((link) -> link.tags)
     .flatten()
     .uniq()
-    .sortBy((tag) -> tag)
-    .each((tag) -> console.log(tag))
+    .map((tag) ->
+      counted_tag = 
+        tag: tag
+        count: _.filter(links, (link) -> _.include(link.tags, tag)).length
+      counted_tag
+    )
+    .sortBy((counted_tag) -> counted_tag.count)
+    .reverse()
+    .each((counted_tag) -> 
+      console.log("%s - %d", counted_tag.tag, counted_tag.count)
+    )
 
 program
   .command('ls-tags')
