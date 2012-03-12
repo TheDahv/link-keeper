@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "commander": "~v0.5.1" 
+    , "underscore": "~v1.3.1"
   },
   "devDependencies": {
     "jasmine-node": "~v1.0.22"   
