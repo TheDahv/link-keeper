@@ -1,0 +1,57 @@
+[
+  {
+    "url": "http://www.walkscore.com/OR/Portland"
+    , "tags": ["misc", "jobs"]
+    , "nick": ""
+  }
+  , {
+    "url": "https://andbang.com/"  
+    , "tags": ["programming", "productivity"]
+    , "nick": ""
+  }
+  , {
+    "url": "http://dailyjs.com/2012/01/26/effective-node-modules/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+dailyjs+%28DailyJS%29"
+    , "tags": ["programming", "node"]
+    , "nick": ""
+  }
+  , {
+    "url": "http://www.mirah.org/"
+    , "tags": ["programming"]
+    , "nick": ""
+  }
+  , {
+    "url": "http://altdevblogaday.com/2012/01/23/writing-your-own-websocket-server/"
+    , "tags": ["programming"]
+    , "nick": ""
+  }
+  , {
+    "url": "http://code.google.com/edu/languages/google-python-class/introduction.html"
+    , "tags": ["programming", "python"]
+    , "nick": ""
+  }
+  , {
+    "url": "http://www.call-cc.org/"
+    , "tags": ["programming", "lisp"]
+    , "nick": ""
+  }
+  , {
+    "url": "http://c.learncodethehardway.org/book/learn-c-the-hard-waych23.html"
+    , "tags": ["programming", "c"]
+    , "nick": ""
+  }
+  , {
+    "url": "http://pbb.jashurst.com/contact/"
+    , "tags": ["misc"]
+    , "nick": ""
+  }
+  , {
+    "url": "http://ndpsoftware.com/git-cheatsheet.html#loc=stash;"
+    , "tags": ["programming", "git"]
+    , "nick": "git-cheat"
+  }
+  , {
+    "url": "http://blog.chavezgu.com/2012/03/07/the-command-line-challenge/"
+    , "tags": ["programming", "linux"]
+    , "nick": ""
+  }
+]
