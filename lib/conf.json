@@ -1,0 +1,7 @@
+{
+  "browser": "/usr/bin/google-chrome",
+  "database": {
+    "engine": "json",
+    "path": "./lib/links.json"
+  }
+}

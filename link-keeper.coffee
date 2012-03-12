@@ -1,8 +1,11 @@
 #!/usr/bin/env coffee
 program = require('commander')
-_ = require('underscore')
+exec = require('child_process').exec
 fs = require('fs')
+_ = require('underscore')
+
 links = require('./lib/links')
+conf = require('./lib/conf')
 
 mega_fail = (err) ->
   console.error(err)
@@ -16,7 +19,7 @@ program
 program
   .command('init [path]')
   .description('Initializes link-keeper in the given location')
-  .option('-d, --database [db]', 'The link-keeper datastore')
+  .option('-d, --database [database]', 'The link-keeper datastore')
   .option('-b, --browser [browser]', 'The default browser to launch links')
   .action((path, options) -> 
     # Nothing implemented yet
@@ -113,4 +116,33 @@ program
     )
   )
 
+# $ launch [link_id]
+# $ launch [--nick]
+program
+  .command('launch [link_id]')
+  .description('Launches the specified link in a browser')
+  .option('-n, --nick [nick]', 'The nickname of the link to launch')
+  .action((link_id, options) ->
+    url = ""
+    nick = options.nick
+    
+    if nick
+      filter_fn = (l) -> l.nick == nick
+    else
+      filter_fn = (l) -> l.id == link_id
+
+    requested_link = _.find(links, filter_fn)
+    url = requested_link.url if requested_link
+
+    if url
+      exec(conf.browser + ' ' + url, (err, stdout, stderr) -> 
+        mega_fail(err) if (err)
+
+        console.log('link launched')
+        console.log(stdout)
+      ) 
+    else
+      mega_fail("Unable to find that link!")
+
+  )
 program.parse(process.argv)

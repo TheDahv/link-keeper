@@ -48,6 +48,7 @@ Lists all the things link-keeper can do
 
 ###List tags
 `link-keeper ls-tags`
+
 `link-keeper list-tags`
 
 Lists all tags link-keeper knows about.
@@ -92,7 +93,9 @@ you do with links.
 This also understands link nicks for those links you use regularly.
 
 ###Launch link
-`link-keeper launch [link-id]`
+`link-keeper launch [link_id]`
+
+`link-keeper launch [--nick]`
 
 Launching a link in a browser is likely a common enough activity that it should
 have its own command. This will launch the specified link in whatever browser you
