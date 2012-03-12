@@ -46,6 +46,12 @@ might need to specify a browser it can use to launch your links for you.
 
 Lists all the things link-keeper can do
 
+###List tags
+`link-keeper ls-tags`
+`link-keeper list-tags`
+
+Lists all tags link-keeper knows about.
+
 ###List links
 `link-keeper ls [tag]`
 
