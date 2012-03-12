@@ -61,7 +61,7 @@ Lists all the links stored in link-keeper. If a tag is specified, link-keeper wi
 grab all links with that tag.
 
 ###Add link
-`link-keeper add [tag] [url] [--nick]`
+`link-keeper add [url] [--tags] [--nick]`
 
 Add a link to the data store under the specified tag. If no tag is provided, link-keeper
 will assume you hate organizing your things and will stick it in an 'Misc' group.
