@@ -129,6 +129,26 @@ program
     )
   )
 
+# $ cp [link_id]
+# $ cp [--nick]
+# $ copy [link_id]
+# $ copy [--nick]
+copy_description = 'Copies the specified link into the system clipboard'
+copy_link_action = (link_id, options) ->
+  console.log('NOTHING IMPLEMENTED YET STOP TRYING TO DO THIS')
+
+program
+  .command('cp [link_id]')
+  .description(copy_description)
+  .option('-n, --nick [nick]', 'The nickname of the link to launch')
+  .action(copy_link_action)
+
+program
+  .command('copy [link_id]')
+  .description(copy_description)
+  .option('-n, --nick [nick]', 'The nickname of the link to launch')
+  .action(copy_link_action)
+
 # $ launch [link_id]
 # $ launch [--nick]
 program
@@ -157,4 +177,5 @@ program
     else
       mega_fail("Unable to find that link!")
   )
+
 program.parse(process.argv)
