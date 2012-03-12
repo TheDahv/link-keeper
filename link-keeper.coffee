@@ -1,19 +1,33 @@
 #!/usr/bin/env coffee
+
 program = require('commander')
 exec = require('child_process').exec
 fs = require('fs')
 _ = require('underscore')
 
-links = require('./lib/links')
+# Prepare the link data to have
+# sequential IDs when the program loads
+load_links = () ->
+  id_index = 1
+  links = require('./lib/links')
+  _.chain(links)
+    .map((link) ->
+      link.id = id_index
+      id_index += 1
+
+      link
+    )
+    .value()
+
+links = load_links()
+
 conf = require('./lib/conf')
 
 mega_fail = (err) ->
   console.error(err)
   process.exit(1)
 
-program
-  .version('0.0.1')
-  .parse(process.argv)
+program.version('0.0.1')
 
 # $ init [path]
 program
@@ -61,19 +75,18 @@ program
 # $ ls [tag]
 # $ list [tag]
 list_links = (tag = "All") ->
-  chained_links
-
   if tag == "All"
     chained_links = _.chain(links)
   else
     chained_links = _.chain(links).filter((link) -> _.include(link.tags, tag))
 
-  chained_links.map((link) -> link.url).value()
+  chained_links.value()
 
 list_link_action = (tag) -> 
   links = list_links(tag)
-  _.each(links, (t) -> 
-    console.log(t)
+  _.each(links, (link) -> 
+    # Reformat as ASCII table
+    console.log("%d\t%s\t%s", link.id, link.tags.join(", "), link.url)
   )
 
 list_link_description = 'Lists links stored in link-keeper'
@@ -123,13 +136,13 @@ program
   .description('Launches the specified link in a browser')
   .option('-n, --nick [nick]', 'The nickname of the link to launch')
   .action((link_id, options) ->
-    url = ""
     nick = options.nick
+    id = parseInt(link_id, 10)
     
     if nick
       filter_fn = (l) -> l.nick == nick
     else
-      filter_fn = (l) -> l.id == link_id
+      filter_fn = (l) -> l.id == id
 
     requested_link = _.find(links, filter_fn)
     url = requested_link.url if requested_link
@@ -143,6 +156,5 @@ program
       ) 
     else
       mega_fail("Unable to find that link!")
-
   )
 program.parse(process.argv)
