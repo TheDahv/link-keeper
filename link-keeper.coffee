@@ -2,6 +2,7 @@
 
 program = require('commander')
 exec = require('child_process').exec
+spawn = require('child_process').spawn
 fs = require('fs')
 _ = require('underscore')
 Table = require('cli-table')
@@ -150,7 +151,41 @@ program
 # $ copy [--nick]
 copy_description = 'Copies the specified link into the system clipboard'
 copy_link_action = (link_id, options) ->
-  console.log('NOTHING IMPLEMENTED YET STOP TRYING TO DO THIS')
+  nick = options.nick
+  id = parseInt(link_id, 10)
+  
+  if nick
+    link = _.find(links, (l) -> l.nick == nick)
+  else
+    link = _.find(links, (l) -> l.id == id)
+
+  if link
+    console.log(link.url)
+    echo = spawn('echo', [link.url])
+    xclip = spawn('/usr/bin/xclip')
+
+    echo.stdout.on('data', (data) ->
+      xclip.stdin.write(data) 
+    )
+
+    echo.on('exit', (code) ->
+      console.log('echo has exited')
+      console.log(code) unless code == 0
+      xclip.stdin.end()
+    )
+
+    xclip.on('stderr', (data) ->
+      console.log('xclip reported an error')
+      console.log(data) 
+    )
+
+    xclip.on('exit', (code) ->
+      console.log(code) unless code == 0
+      console.log('Copied link to clipboard!')
+    )
+
+  else
+    mega_fail("Unable to find that link!")
 
 program
   .command('cp [link_id]')
