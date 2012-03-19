@@ -37,7 +37,7 @@ program
   .description('Initializes link-keeper in the given location')
   .option('-d, --database [database]', 'The link-keeper datastore')
   .option('-b, --browser [browser]', 'The default browser to launch links')
-  .action((path, options) -> 
+  .action((path, options) ->
     # Nothing implemented yet
     path = path || "./"
     database = options.database || "json"
@@ -54,7 +54,7 @@ group_tags = () ->
     flatten().
     uniq().
     map((tag) ->
-      counted_tag = 
+      counted_tag =
         tag: tag
         count: _.filter(links, (link) -> _.include(link.tags, tag)).length
       counted_tag
@@ -64,7 +64,7 @@ group_tags = () ->
     value()
 
 list_tag_action = () ->
-  args = 
+  args =
     head: ['Tag', 'Count']
     colWidths: [15, 10]
     colAligns: ['left', 'right']
@@ -92,14 +92,14 @@ list_links = (tag = "All") ->
 
   chained_links.value()
 
-list_link_action = (tag) -> 
+list_link_action = (tag) ->
   links = list_links(tag)
-  args = 
+  args =
     head: ['Link Id', 'Tags', 'Url', 'Nick']
     colWidths: [10, 40, 60, 15]
   table = new Table(args)
 
-  _.each(links, (link) -> 
+  _.each(links, (link) ->
     table.push([link.id, link.tags.join(", "), link.url, link.nick])
   )
 
@@ -131,8 +131,8 @@ program
       tags = options.tags.split(',')
     else
       tags = ["misc"]
-  
-    new_link = 
+
+    new_link =
       url: url
       tags: tags
       nick: nick
@@ -153,7 +153,7 @@ copy_description = 'Copies the specified link into the system clipboard'
 copy_link_action = (link_id, options) ->
   nick = options.nick
   id = parseInt(link_id, 10)
-  
+
   if nick
     link = _.find(links, (l) -> l.nick == nick)
   else
@@ -165,7 +165,7 @@ copy_link_action = (link_id, options) ->
     xclip = spawn('/usr/bin/xclip')
 
     echo.stdout.on('data', (data) ->
-      xclip.stdin.write(data) 
+      xclip.stdin.write(data)
     )
 
     echo.on('exit', (code) ->
@@ -176,7 +176,7 @@ copy_link_action = (link_id, options) ->
 
     xclip.on('stderr', (data) ->
       console.log('xclip reported an error')
-      console.log(data) 
+      console.log(data)
     )
 
     xclip.on('exit', (code) ->
@@ -208,7 +208,7 @@ program
   .action((link_id, options) ->
     nick = options.nick
     id = parseInt(link_id, 10)
-    
+
     if nick
       filter_fn = (l) -> l.nick == nick
     else
@@ -218,12 +218,12 @@ program
     url = requested_link.url if requested_link
 
     if url
-      exec(conf.browser + ' ' + url, (err, stdout, stderr) -> 
+      exec(conf.browser + ' ' + url, (err, stdout, stderr) ->
         mega_fail(err) if (err)
 
         console.log('link launched')
         console.log(stdout)
-      ) 
+      )
     else
       mega_fail("Unable to find that link!")
   )
