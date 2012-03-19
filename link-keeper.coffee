@@ -4,6 +4,7 @@ program = require('commander')
 exec = require('child_process').exec
 fs = require('fs')
 _ = require('underscore')
+Table = require('cli-table')
 
 # Prepare the link data to have
 # sequential IDs when the program loads
@@ -45,22 +46,30 @@ program
 # $ ls-tags
 # $ list-tags
 list_tag_description = 'Lists all the tags link-keeper knows about.'
-list_tag_action = () ->
-  _.chain(links)
-    .map((link) -> link.tags)
-    .flatten()
-    .uniq()
-    .map((tag) ->
+
+group_tags = () ->
+  _.chain(links).
+    map((link) -> link.tags).
+    flatten().
+    uniq().
+    map((tag) ->
       counted_tag = 
         tag: tag
         count: _.filter(links, (link) -> _.include(link.tags, tag)).length
       counted_tag
-    )
-    .sortBy((counted_tag) -> counted_tag.count)
-    .reverse()
-    .each((counted_tag) -> 
-      console.log("%s - %d", counted_tag.tag, counted_tag.count)
-    )
+    ).
+    sortBy((counted_tag) -> counted_tag.count).
+    reverse().
+    value()
+
+list_tag_action = () ->
+  args = 
+    head: ['Tag', 'Count']
+    colWidths: [15, 10]
+    colAligns: ['left', 'right']
+  table = new Table(args)
+  _.each(group_tags(), (group) -> table.push([group.tag, group.count]))
+  console.log(table.toString())
 
 program
   .command('ls-tags')
@@ -84,10 +93,16 @@ list_links = (tag = "All") ->
 
 list_link_action = (tag) -> 
   links = list_links(tag)
+  args = 
+    head: ['Link Id', 'Tags', 'Url', 'Nick']
+    colWidths: [10, 40, 60, 15]
+  table = new Table(args)
+
   _.each(links, (link) -> 
-    # Reformat as ASCII table
-    console.log("%d\t%s\t%s", link.id, link.tags.join(", "), link.url)
+    table.push([link.id, link.tags.join(", "), link.url, link.nick])
   )
+
+  console.log(table.toString())
 
 list_link_description = 'Lists links stored in link-keeper'
 
